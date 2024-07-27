@@ -1,5 +1,4 @@
 "use client";
-
 import TaskLists, { Task } from "@/app/components/TaskLists";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { Button } from "@/app/components/ui/button";
@@ -74,7 +73,7 @@ export default function Page() {
     } else {
       if (isOnline) {
         try {
-          const response = await axios.post<Task>("/api/tasks", taskToAdd);
+          const response = await axios.post<Task>("/api/task", taskToAdd);
           const newTask = response.data;
           setTasks((prevTasks) => [...prevTasks, newTask]);
           await addTaskToDB(newTask);
@@ -92,7 +91,7 @@ export default function Page() {
   const deleteTask = async (id: number) => {
     try {
       if (isOnline) {
-        await axios.delete(`/api/tasks/${id}`);
+        await axios.delete(`/api/task/${id}`);
       }
       await deleteTaskById(id);
       setTasks(tasks.filter((task) => task.id !== id));
