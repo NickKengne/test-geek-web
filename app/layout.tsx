@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Metadata } from "next";
 
-const bricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
+const bricolageGrotesque = Space_Grotesk({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
