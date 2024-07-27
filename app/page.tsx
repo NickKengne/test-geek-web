@@ -55,7 +55,7 @@ export default function Page() {
 
   const fetchTasksFromServer = async () => {
     try {
-      const response = await axios.get<Task[]>("/api/tasks");
+      const response = await axios.get<Task[]>("http://localhost:8087/api/v1/task/all");
       const serverTasks = response.data;
       setTasks(serverTasks);
       await clearTasksInDB();
@@ -63,7 +63,7 @@ export default function Page() {
         await addTaskToDB(task);
       }
     } catch (error) {
-      console.error("Failed to fetch tasks from server:", error);
+     toast("Failed to fetch task from the server")
     }
   };
 
@@ -73,10 +73,10 @@ export default function Page() {
     } else {
       if (isOnline) {
         try {
-          const response = await axios.post<Task>("/api/task", taskToAdd);
-          const newTask = response.data;
-          setTasks((prevTasks) => [...prevTasks, newTask]);
-          await addTaskToDB(newTask);
+          const response = await axios.post("http://localhost:8087/api/v1/task/", taskToAdd);
+          toast(response.data.message)
+          setTasks((prevTasks) => [...prevTasks, taskToAdd]);
+          //await addTaskToDB(taskToAdd);
         } catch (error) {
           toast("Failed to add task to server");
         }
@@ -89,16 +89,17 @@ export default function Page() {
   };
 
   const deleteTask = async (id: number) => {
-    try {
+   
       if (isOnline) {
-        await axios.delete(`/api/task/${id}`);
+       const deleteResponse = await axios.delete(`http://localhost:8087/api/v1/task/${id}`);
+       toast(deleteResponse.data.message)
       }
       await deleteTaskById(id);
       setTasks(tasks.filter((task) => task.id !== id));
-    } catch (error) {
-      toast("Failed to delete task");
-    }
+    
   };
+
+
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center p-7">
