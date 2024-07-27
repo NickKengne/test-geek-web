@@ -1,4 +1,4 @@
-import { Task } from '@/components/TaskLists';
+import { Task } from '@/app/components/TaskLists';
 import { openDB } from 'idb';
 
 const DB_NAME = 'tasksdb';

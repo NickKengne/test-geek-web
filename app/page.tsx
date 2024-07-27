@@ -1,9 +1,9 @@
 "use client";
 
-import TaskLists, { Task } from "@/components/TaskLists";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import TaskLists, { Task } from "@/app/components/TaskLists";
+import { ThemeToggle } from "@/app/components/ThemeToggle";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
 import {
   addTaskToDB,
   getTasksFromDB,
